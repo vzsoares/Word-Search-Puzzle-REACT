@@ -3,17 +3,6 @@ import { FaGithubSquare } from "react-icons/fa";
 
 function App() {
   // states
-
-  const gridTest = [
-    ["M", "Z", "U", "L", "I", "L", "A", "Z", "Q", "U", "L", "P", "A"],
-    ["A", "P", "L", "U", "U", "A", "O", "V", "U", "E", "E", "Z", "B"],
-    ["C", "X", "T", "R", "Z", "S", "K", "U", "Z", "Q", "U", "M", "A"],
-    ["A", "Z", "V", "E", "R", "M", "E", "L", "H", "O", "D", "U", "C"],
-    ["C", "U", "X", "E", "L", "L", "A", "O", "D", "S", "Z", "D", "A"],
-    ["O", "L", "K", "U", "R", "Z", "O", "O", "D", "H", "K", "U", "T"],
-    ["Z", "O", "Z", "S", "U", "D", "A", "L", "U", "Z", "A", "V", "E"],
-    ["A", "A", "A", "L", "U", "L", "E", "L", "A", "M", "B", "D", "A"],
-  ];
   const gridTestJson =
     '[["M","Z","U","L","I","L","A","Z","Q","U","L","P","A"],["A","P","L","U","U","A","O","V","U","E","E","Z","B"],["C","X","T","R","Z","S","K","U","Z","Q","U","M","A"],["A","Z","V","E","R","M","E","L","H","O","D","U","C"],["C","U","X","E","L","L","A","O","D","S","Z","D","A"],["O","L","K","U","R","Z","O","O","D","H","K","U","T"],["Z","O","Z","S","U","D","A","L","U","Z","A","V","E"],["A","A","A","L","U","L","E","L","A","M","B","D","A"]]';
 
@@ -27,18 +16,20 @@ function App() {
     ["Z", "O", "Z", "S", "U", "U", "A", "L", "U", "Z", "A", "V", "L"],
     ["A", "A", "A", "L", "U", "L", "Z", "L", "U", "S", "K", "D", "D"],
   ]);
-  const [grid3, setGrid3] = useState([]);
+
+  const [inputGrid, setInputGrid] = useState([]);
   const [word, setWord] = useState("AZUL");
   const [showDirections, setShowDirections] = useState(false);
   const [showChangeGrid, setShowChangeGrid] = useState(false);
   // direction switches
-  const [resized, setResized] = useState(false);
   const [findSul, setFindSul] = useState("true");
   const [findLeste, setFindLeste] = useState("true");
   const [findNorte, setFindNorte] = useState("");
   const [findOeste, setFindOeste] = useState("");
   const [findSudeste, setFindSudeste] = useState("true");
   const [findSudoeste, setFindSudoeste] = useState("");
+
+  // implicit state
   // const [findNordeste, setFindNordeste] = useState("")
   // const [findNoroeste, setFindNoroeste] = useState("")
 
@@ -235,10 +226,10 @@ function App() {
 
   // Grid Content Component
   function GridContent() {
-    const palavrasData = [];
+    const charData = [];
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
-        palavrasData.push([[i, j], grid[i][j]]);
+        charData.push([[i, j], grid[i][j]]);
       }
     }
     return (
@@ -249,7 +240,7 @@ function App() {
           gridTemplateColumns: `repeat(${grid[0].length},1fr)`,
         }}
       >
-        {palavrasData.map((e) => {
+        {charData.map((e) => {
           return (
             <div key={e[0]} id={e[0]}>
               {e[1]}
@@ -261,7 +252,7 @@ function App() {
   }
 
   // change colors function
-  const mudarCores = () => {
+  const updateGridColors = () => {
     const data = findMatch(word, grid);
     data.forEach((e) => {
       e.forEach((x) => {
@@ -272,7 +263,7 @@ function App() {
   };
   // change colors UseEffect
   useEffect(() => {
-    mudarCores();
+    updateGridColors();
   }, [
     word,
     findSudoeste,
@@ -281,20 +272,17 @@ function App() {
     findNorte,
     findLeste,
     findSul,
-    grid3,
+    inputGrid,
     grid,
     showDirections,
     showChangeGrid,
-    resized,
   ]);
 
   // handle submit grid
   const submitGrid = (e) => {
     e.preventDefault();
-    // const test = JSON.stringify(gridTest)
-    // console.log(test)
     try {
-      setGrid(JSON.parse(grid3));
+      setGrid(JSON.parse(inputGrid));
     } catch (err) {
       alert("Wrong jsonString input");
     }
@@ -307,7 +295,6 @@ function App() {
 
   // handle show changeGridDiv
   const handleShowChangeGrid = () => {
-    // console.log(JSON.stringify(gridTest))
     setShowChangeGrid(!showChangeGrid);
   };
 
@@ -481,8 +468,8 @@ function App() {
           <form action=''>
             <input
               type='text'
-              value={grid3}
-              onChange={(e) => setGrid3(e.target.value)}
+              value={inputGrid}
+              onChange={(e) => setInputGrid(e.target.value)}
             />
             <input
               type='button'
