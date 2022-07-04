@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import { FaGithubSquare } from "react-icons/fa"
+import { useState, useEffect } from "react";
+import { FaGithubSquare } from "react-icons/fa";
 
 function App() {
   // states
@@ -13,9 +13,9 @@ function App() {
     ["O", "L", "K", "U", "R", "Z", "O", "O", "D", "H", "K", "U", "T"],
     ["Z", "O", "Z", "S", "U", "D", "A", "L", "U", "Z", "A", "V", "E"],
     ["A", "A", "A", "L", "U", "L", "E", "L", "A", "M", "B", "D", "A"],
-  ]
+  ];
   const gridTestJson =
-    '[["M","Z","U","L","I","L","A","Z","Q","U","L","P","A"],["A","P","L","U","U","A","O","V","U","E","E","Z","B"],["C","X","T","R","Z","S","K","U","Z","Q","U","M","A"],["A","Z","V","E","R","M","E","L","H","O","D","U","C"],["C","U","X","E","L","L","A","O","D","S","Z","D","A"],["O","L","K","U","R","Z","O","O","D","H","K","U","T"],["Z","O","Z","S","U","D","A","L","U","Z","A","V","E"],["A","A","A","L","U","L","E","L","A","M","B","D","A"]]'
+    '[["M","Z","U","L","I","L","A","Z","Q","U","L","P","A"],["A","P","L","U","U","A","O","V","U","E","E","Z","B"],["C","X","T","R","Z","S","K","U","Z","Q","U","M","A"],["A","Z","V","E","R","M","E","L","H","O","D","U","C"],["C","U","X","E","L","L","A","O","D","S","Z","D","A"],["O","L","K","U","R","Z","O","O","D","H","K","U","T"],["Z","O","Z","S","U","D","A","L","U","Z","A","V","E"],["A","A","A","L","U","L","E","L","A","M","B","D","A"]]';
 
   const [grid, setGrid] = useState([
     ["A", "Z", "U", "L", "X", "T", "E", "A", "Q", "U", "L", "P", "A"],
@@ -26,219 +26,219 @@ function App() {
     ["U", "L", "K", "U", "Z", "Z", "O", "O", "D", "H", "K", "U", "U"],
     ["Z", "O", "Z", "S", "U", "U", "A", "L", "U", "Z", "A", "V", "L"],
     ["A", "A", "A", "L", "U", "L", "Z", "L", "U", "S", "K", "D", "D"],
-  ])
-  const [grid3, setGrid3] = useState([])
-  const [word, setWord] = useState("AZUL")
-  const [showDirections, setShowDirections] = useState(false)
-  const [showChangeGrid, setShowChangeGrid] = useState(false)
-  const [resized, setResized] = useState(false)
+  ]);
+  const [grid3, setGrid3] = useState([]);
+  const [word, setWord] = useState("AZUL");
+  const [showDirections, setShowDirections] = useState(false);
+  const [showChangeGrid, setShowChangeGrid] = useState(false);
+  const [resized, setResized] = useState(false);
   // direction switches
-  const [findSul, setFindSul] = useState("true")
-  const [findLeste, setFindLeste] = useState("true")
-  const [findNorte, setFindNorte] = useState("")
-  const [findOeste, setFindOeste] = useState("")
-  const [findSudeste, setFindSudeste] = useState("true")
-  const [findSudoeste, setFindSudoeste] = useState("")
+  const [findSul, setFindSul] = useState("true");
+  const [findLeste, setFindLeste] = useState("true");
+  const [findNorte, setFindNorte] = useState("");
+  const [findOeste, setFindOeste] = useState("");
+  const [findSudeste, setFindSudeste] = useState("true");
+  const [findSudoeste, setFindSudoeste] = useState("");
   // const [findNordeste, setFindNordeste] = useState("")
   // const [findNoroeste, setFindNoroeste] = useState("")
 
   // get id's array function
   const findMatch = (word, grid) => {
-    const result = []
+    const result = [];
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
         if (findNorte) {
           if (aNorte(word, i, j, grid)) {
-            result.push(aNorte(word, i, j, grid))
+            result.push(aNorte(word, i, j, grid));
           }
         }
         if (findSul) {
           if (aSul(word, i, j, grid)) {
-            result.push(aSul(word, i, j, grid))
+            result.push(aSul(word, i, j, grid));
           }
         }
         if (findLeste) {
           if (aLeste(word, i, j, grid)) {
-            result.push(aLeste(word, i, j, grid))
+            result.push(aLeste(word, i, j, grid));
           }
         }
         if (findOeste) {
           if (aOeste(word, i, j, grid)) {
-            result.push(aOeste(word, i, j, grid))
+            result.push(aOeste(word, i, j, grid));
           }
         }
         if (findSudoeste) {
           if (aSudoeste(word, i, j, grid)) {
-            result.push(aSudoeste(word, i, j, grid))
+            result.push(aSudoeste(word, i, j, grid));
           }
         }
         if (findSudeste) {
           if (aSudeste(word, i, j, grid)) {
-            result.push(aSudeste(word, i, j, grid))
+            result.push(aSudeste(word, i, j, grid));
           }
         }
         if (findSudeste) {
           if (aNordeste(word, i, j, grid)) {
-            result.push(aNordeste(word, i, j, grid))
+            result.push(aNordeste(word, i, j, grid));
           }
         }
         if (findSudoeste) {
           if (aNoroeste(word, i, j, grid)) {
-            result.push(aNoroeste(word, i, j, grid))
+            result.push(aNoroeste(word, i, j, grid));
           }
         }
       }
     }
-    return result
-  }
+    return result;
+  };
 
   // sul
   const aSul = (word, i, j, grid) => {
-    const myWord = word.split("")
-    const response = []
+    const myWord = word.split("");
+    const response = [];
     for (let x = 0; x < myWord.length; x++) {
       if (i + x >= grid.length) {
-        return false
+        return false;
       }
       if (myWord[x] !== grid[i + x][j]) {
-        return false
+        return false;
       }
-      response.push([i + x, j])
+      response.push([i + x, j]);
     }
 
-    return response
-  }
+    return response;
+  };
 
   // leste
   const aLeste = (word, i, j, grid) => {
-    const myWord = word.split("")
-    const response = []
+    const myWord = word.split("");
+    const response = [];
     for (let x = 0; x < myWord.length; x++) {
       if (j + x >= grid[i].length) {
-        return false
+        return false;
       }
       if (myWord[x] !== grid[i][j + x]) {
-        return false
+        return false;
       }
-      response.push([i, j + x])
+      response.push([i, j + x]);
     }
 
-    return response
-  }
+    return response;
+  };
 
   // oeste
   const aOeste = (word, i, j, grid) => {
-    const myWord = word.split("")
-    const response = []
+    const myWord = word.split("");
+    const response = [];
     for (let x = 0; x < myWord.length; x++) {
       if (j - x < 0) {
-        return false
+        return false;
       }
       if (myWord[x] !== grid[i][j - x]) {
-        return false
+        return false;
       }
-      response.push([i, j - x])
+      response.push([i, j - x]);
     }
 
-    return response
-  }
+    return response;
+  };
 
   // norte
   const aNorte = (word, i, j, grid) => {
-    const myWord = word.split("")
-    const response = []
+    const myWord = word.split("");
+    const response = [];
     for (let x = 0; x < myWord.length; x++) {
       if (i - x < 0) {
-        return false
+        return false;
       }
       if (myWord[x] !== grid[i - x][j]) {
-        return false
+        return false;
       }
-      response.push([i - x, j])
+      response.push([i - x, j]);
     }
 
-    return response
-  }
+    return response;
+  };
 
   // sudeste
   const aSudeste = (word, i, j, grid) => {
-    const myWord = word.split("")
-    const response = []
+    const myWord = word.split("");
+    const response = [];
     for (let x = 0; x < myWord.length; x++) {
       if (i + x >= grid.length || j + x >= grid[i].length) {
-        return false
+        return false;
       }
       if (myWord[x] !== grid[i + x][j + x]) {
-        return false
+        return false;
       }
-      response.push([i + x, j + x])
+      response.push([i + x, j + x]);
     }
 
-    return response
-  }
+    return response;
+  };
 
   // sudoeste
   const aSudoeste = (word, i, j, grid) => {
-    const myWord = word.split("")
-    const response = []
+    const myWord = word.split("");
+    const response = [];
     for (let x = 0; x < myWord.length; x++) {
       if (i + x >= grid.length || j - x < 0) {
-        return false
+        return false;
       }
       if (myWord[x] !== grid[i + x][j - x]) {
-        return false
+        return false;
       }
-      response.push([i + x, j - x])
+      response.push([i + x, j - x]);
     }
 
-    return response
-  }
+    return response;
+  };
 
   // nordeste
   const aNordeste = (word, i, j, grid) => {
-    const myWord = word.split("")
-    const response = []
+    const myWord = word.split("");
+    const response = [];
     for (let x = 0; x < myWord.length; x++) {
       if (i - x < 0 || j + x >= grid[i].length) {
-        return false
+        return false;
       }
       if (i + x <= 0 || j + x <= 0) {
-        return false
+        return false;
       }
       if (myWord[x] !== grid[i - x][j + x]) {
-        return false
+        return false;
       }
-      response.push([i - x, j + x])
+      response.push([i - x, j + x]);
     }
 
-    return response
-  }
+    return response;
+  };
 
   // noroeste
   const aNoroeste = (word, i, j, grid) => {
-    const myWord = word.split("")
-    const response = []
+    const myWord = word.split("");
+    const response = [];
     for (let x = 0; x < myWord.length; x++) {
       if (i - x < 0 || j - x < 0) {
-        return false
+        return false;
       }
       if (myWord[x] !== grid[i - x][j - x]) {
-        return false
+        return false;
       }
-      response.push([i - x, j - x])
+      response.push([i - x, j - x]);
     }
 
-    return response
-  }
+    return response;
+  };
 
   //
 
   // Grid Content Component
   function GridContent() {
-    const palavrasData = []
+    const palavrasData = [];
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid[i].length; j++) {
-        palavrasData.push([[i, j], grid[i][j]])
+        palavrasData.push([[i, j], grid[i][j]]);
       }
     }
     return (
@@ -254,25 +254,25 @@ function App() {
             <div key={e[0]} id={e[0]}>
               {e[1]}
             </div>
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 
   // change colors function
   const mudarCores = () => {
-    const data = findMatch(word, grid)
+    const data = findMatch(word, grid);
     data.forEach((e) => {
       e.forEach((x) => {
         document.getElementById(`${x.toString()}`).style.backgroundColor =
-          "orange"
-      })
-    })
-  }
+          "orange";
+      });
+    });
+  };
   // change colors UseEffect
   useEffect(() => {
-    mudarCores()
+    mudarCores();
   }, [
     word,
     findSudoeste,
@@ -286,54 +286,54 @@ function App() {
     showDirections,
     showChangeGrid,
     resized,
-  ])
+  ]);
   // responsiveness useEffect
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth >= 530 && window.innerWidth <= 590) {
         if (resized) {
-          setResized(false)
+          setResized(false);
         } else if (!resized) {
-          setResized(true)
+          setResized(true);
         }
       }
     }
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("resize", handleResize);
     return (_) => {
-      window.removeEventListener("resize", handleResize)
-    }
-  })
+      window.removeEventListener("resize", handleResize);
+    };
+  });
 
   // handle submit grid
   const submitGrid = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // const test = JSON.stringify(gridTest)
     // console.log(test)
     try {
-      setGrid(JSON.parse(grid3))
+      setGrid(JSON.parse(grid3));
     } catch (err) {
-      alert("Wrong jsonString input")
+      alert("Wrong jsonString input");
     }
-  }
+  };
 
   // handle show directionsDiv
   const showDirectionsDiv = () => {
     if (showDirections) {
-      setShowDirections(false)
+      setShowDirections(false);
     } else if (!showDirections) {
-      setShowDirections(true)
+      setShowDirections(true);
     }
-  }
+  };
 
   // handle show changeGridDiv
   const handleShowChangeGrid = () => {
     // console.log(JSON.stringify(gridTest))
     if (showChangeGrid) {
-      setShowChangeGrid(false)
+      setShowChangeGrid(false);
     } else if (!showChangeGrid) {
-      setShowChangeGrid(true)
+      setShowChangeGrid(true);
     }
-  }
+  };
 
   // styles
   const girdContainerStyle = {
@@ -343,7 +343,7 @@ function App() {
     border: "5px solid black",
     margin: "0 auto",
     marginBottom: "0.5rem",
-  }
+  };
 
   const directionsContainerStyle = {
     gridTemplateColumns: `${
@@ -358,7 +358,7 @@ function App() {
     display: `${showDirections ? "grid" : "none"}`,
     marginBottom: "0.5rem",
     alignItems: "center",
-  }
+  };
 
   const directionStyle = {
     display: "grid",
@@ -371,9 +371,9 @@ function App() {
     margin: "0 auto",
     textAlign: "center",
     alignItems: "center",
-  }
-  const directionSelectStyle = { width: "60px", margin: "0", padding: "0" }
-  const directionH5Style = { margin: "0" }
+  };
+  const directionSelectStyle = { width: "60px", margin: "0", padding: "0" };
+  const directionH5Style = { margin: "0" };
 
   const gridInputContainer = {
     display: `${showChangeGrid ? "" : "none"}`,
@@ -383,7 +383,7 @@ function App() {
     margin: "0 auto",
     padding: "0.35rem",
     marginBottom: "0.5rem",
-  }
+  };
 
   return (
     <>
@@ -543,7 +543,7 @@ function App() {
         </a>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
