@@ -31,8 +31,8 @@ function App() {
   const [word, setWord] = useState("AZUL");
   const [showDirections, setShowDirections] = useState(false);
   const [showChangeGrid, setShowChangeGrid] = useState(false);
-  const [resized, setResized] = useState(false);
   // direction switches
+  const [resized, setResized] = useState(false);
   const [findSul, setFindSul] = useState("true");
   const [findLeste, setFindLeste] = useState("true");
   const [findNorte, setFindNorte] = useState("");
@@ -287,22 +287,6 @@ function App() {
     showChangeGrid,
     resized,
   ]);
-  // responsiveness useEffect
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth >= 530 && window.innerWidth <= 590) {
-        if (resized) {
-          setResized(false);
-        } else if (!resized) {
-          setResized(true);
-        }
-      }
-    }
-    window.addEventListener("resize", handleResize);
-    return (_) => {
-      window.removeEventListener("resize", handleResize);
-    };
-  });
 
   // handle submit grid
   const submitGrid = (e) => {
@@ -318,21 +302,13 @@ function App() {
 
   // handle show directionsDiv
   const showDirectionsDiv = () => {
-    if (showDirections) {
-      setShowDirections(false);
-    } else if (!showDirections) {
-      setShowDirections(true);
-    }
+    setShowDirections(!showDirections);
   };
 
   // handle show changeGridDiv
   const handleShowChangeGrid = () => {
     // console.log(JSON.stringify(gridTest))
-    if (showChangeGrid) {
-      setShowChangeGrid(false);
-    } else if (!showChangeGrid) {
-      setShowChangeGrid(true);
-    }
+    setShowChangeGrid(!showChangeGrid);
   };
 
   // styles
@@ -346,34 +322,32 @@ function App() {
   };
 
   const directionsContainerStyle = {
-    gridTemplateColumns: `${
-      window.innerWidth < 560 ? "1fr 1fr" : "1fr 1fr 1fr "
-    }`,
-    gridTemplateRows: `${window.innerWidth < 560 ? "1fr 1fr 1fr" : "1fr 1fr"}`,
+    display: `${showDirections ? "grid" : "none"}`,
+    gridTemplateColumns: "1fr 1fr 1fr",
     margin: "0 auto",
     width: "80vw",
     maxWidth: "500px",
-    height: `${window.innerWidth < 560 ? "220px" : "150px"}`,
+    minHeight: "100px",
     border: "3px solid black",
-    display: `${showDirections ? "grid" : "none"}`,
     marginBottom: "0.5rem",
-    alignItems: "center",
+    padding: "0.2rem",
+    gap: "0.2rem 0",
   };
 
   const directionStyle = {
-    display: "grid",
-    gridTemplateColumns: `${window.innerWidth < 560 ? "1fr" : "1fr 1fr"}`,
-    gridTemplateRows: `${window.innerWidth < 560 ? "1fr 1fr" : "1fr"}`,
-    justifyContent: "space-between",
-    justifyItems: "center",
-    height: "50px",
-    width: `${window.innerWidth < 560 ? "50px" : "150px"}`,
-    margin: "0 auto",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
     textAlign: "center",
     alignItems: "center",
+    gap: "0.20rem",
   };
-  const directionSelectStyle = { width: "60px", margin: "0", padding: "0" };
-  const directionH5Style = { margin: "0" };
+  const directionSelectStyle = { width: "", margin: "0", padding: "0" };
+  const directionH5Style = {
+    margin: "0",
+    maxWidth: "100px",
+    width: "100%",
+  };
 
   const gridInputContainer = {
     display: `${showChangeGrid ? "" : "none"}`,
